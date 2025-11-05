@@ -95,3 +95,10 @@ var welcomeScreen = document.querySelector("#welcome")
 function closeWindow(element) {
   element.style.display = "none"
 }
+
+var selectedIcon = selected
+
+function selectIcon(element) {
+  element.classList.add("selected");
+  selectedIcon = element
+} 
