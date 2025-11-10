@@ -313,16 +313,37 @@ body {
 @media (min-width: 1200px) {
   #notes iframe { height: 70vh; }
 }
+/* Welcome/notes/stats use square cropped images where intended */
 #welcome img,
 #notes img,
-#stats img,
-#photo img {
+#stats img {
   width: 250px;
   height: 250px;
   max-width: 100%;
   object-fit: cover; /* crop while preserving aspect */
   display: block;
   border-radius: 6px;
+}
+
+/* Photo images: preserve natural aspect (actual shape) and stack vertically in a scrollable list */
+#photo .photo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center; /* center images horizontally */
+  padding: 12px 8px 18px 8px;
+  box-sizing: border-box;
+  max-height: 55vh; /* make list vertically scrollable inside the window */
+  overflow-y: auto;
+  width: 100%;
+}
+#photo .photo-list img {
+  width: auto;
+  max-width: 92%;
+  height: auto; /* preserve natural aspect ratio */
+  display: block;
+  border-radius: 6px; /* optional, keeps slight rounding without cropping */
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
 }
 
 /* Photo window specific layout */
