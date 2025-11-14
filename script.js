@@ -313,7 +313,7 @@ if (_aboutEl) {
 }
 
 // Wire the about icon (click + keyboard) to open the about window
-var aboutIcon = document.getElementById('About');
+var aboutIcon = document.getElementById('AboutBtn');
 if (aboutIcon) {
   aboutIcon.addEventListener('click', function(e) {
     var about = document.getElementById('About');
