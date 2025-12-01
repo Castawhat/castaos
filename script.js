@@ -226,6 +226,13 @@ if (_photoEl) {
   _photoEl.style.display = 'none';
 }
 
+// Initialize and hide badges window by default
+var _badgesEl = document.querySelector('#badges');
+if (_badgesEl) {
+  initializeWindow('badges');
+  _badgesEl.style.display = 'none';
+}
+
 // Wire the desktop notes icon to open the notes window (click and keyboard)
 var notesIcon = document.getElementById('notesIcon');
 if (notesIcon) {
@@ -276,6 +283,24 @@ if (photoIcon) {
       var photo = document.getElementById('photo');
       if (!photo) return;
       openWindow(photo);
+    }
+  });
+}
+
+// Wire the badges opener link to open the badges window (click + keyboard)
+var openBadgesLink = document.getElementById('openBadges');
+if (openBadgesLink) {
+  openBadgesLink.addEventListener('click', function(e) {
+    var badges = document.getElementById('badges');
+    if (!badges) return;
+    openWindow(badges);
+  });
+  openBadgesLink.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      var badges = document.getElementById('badges');
+      if (!badges) return;
+      openWindow(badges);
     }
   });
 }

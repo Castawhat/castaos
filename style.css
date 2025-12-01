@@ -94,7 +94,7 @@ body {
 }
 
 /* Window (frosted) - applied to welcome and notes */
-#welcome, #notes, #stats, #photo, #contact, #About {
+#welcome, #notes, #stats, #photo, #contact, #About, #badges {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -116,7 +116,7 @@ body {
 
 }
  
-#welcomeheader, #notesheader, #statsheader, #photoheader, #contactheader, #aboutheader {
+#welcomeheader, #notesheader, #statsheader, #photoheader, #contactheader, #aboutheader, #badgesheader {
   position: absolute;
   top: 0;
   left: 0;
@@ -193,7 +193,8 @@ body {
 #stats p,
 #contact p,
 #About p,
-#photo p {
+#photo p,
+#badges p {
   color: #000000; /* reset to pure black */
   line-height: 1.6;
   margin-bottom: 0.9rem;
@@ -214,7 +215,8 @@ body {
 #stats h1,
 #photo h1,
 #About h1,
-#contact h1 {
+#contact h1,
+#badges h1 {
   margin-bottom: 0.4rem;
   color: #000000;
   line-height: 1.25;
@@ -223,7 +225,8 @@ body {
 /* Make preformatted blocks wrap neatly inside windows */
 #contact pre,
 #notes pre,
-#About pre {
+#About pre,
+#badges pre {
   white-space: pre-wrap;
   word-break: break-word;
   hyphens: auto;
