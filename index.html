@@ -23,35 +23,42 @@
 <main>
 
   <div class="topbar">
-        <p id="welcomeopen" role="button" tabindex="0" onclick="document.getElementById('welcome').style.display='block'">
-            CastaOS
-        </p>
+        <div style="display: flex; gap: 8px; align-items: center;">
+          <p id="welcomeopen" role="button" tabindex="0" onclick="document.getElementById('welcome').style.display='block'">
+              CastaOS
+          </p>
+          <p id="wobbleToggle" role="button" tabindex="0" title="Toggle wobbly mode">Do a flip</p>
+        </div>
 
         <p id="timebox">
           <span id="timeElement"></span>
         </p>
   </div>
   <div class="selected" styles="(styles)">
-    <div id="desktopApps" style="padding-top: 64px; display:flex; gap:12px;">
-      <div id="notesIcon" role="button" tabindex="0" aria-label="Open Notes" style="display:inline-block; text-align: center; padding: 16px; filter: drop-shadow(0 0 8px black); width: fit-content">
+    <div id="desktopApps" style="padding-top: 64px; padding-left: 16px; display:flex; gap:12px;">
+      <div id="notesIcon" role="button" tabindex="0" aria-label="Open Notes" style="display:inline-block; text-align: center; padding: 16px; filter: drop-shadow(0 4px 12px rgba(15, 111, 168, 0.3)); width: fit-content">
         <img src="./notes.png" style="width: 64px; height: 64px; border-radius: 16px;">
         <p style="margin: 0px; color: #fff; ">Notes</p>
       </div>
-      <div id="statsIcon" role="button" tabindex="0" aria-label="Open Stats" style="display:inline-block; text-align: center; padding: 16px; filter: drop-shadow(0 0 8px black); width: fit-content">
+      <div id="statsIcon" role="button" tabindex="0" aria-label="Open Stats" style="display:inline-block; text-align: center; padding: 16px; filter: drop-shadow(0 4px 12px rgba(15, 111, 168, 0.3)); width: fit-content">
         <img src="./ststs.png" style="width: 64px; height: 64px; border-radius: 16px;"> <!-- IGNORE, STSTS NOT STATS -->
         <p style="margin: 0px; color: #fff; ">Stats</p>
       </div>
-      <div id="photoIcon" role="button" tabindex="0" aria-label="Open Photo" style="display:inline-block; text-align: center; padding: 16px; filter: drop-shadow(0 0 8px black); width: fit-content">
+      <div id="photoIcon" role="button" tabindex="0" aria-label="Open Photo" style="display:inline-block; text-align: center; padding: 16px; filter: drop-shadow(0 4px 12px rgba(15, 111, 168, 0.3)); width: fit-content">
         <img src="./photo.jpg" style="width: 64px; height: 64px; border-radius: 16px;">
         <p style="margin: 0px; color: #fff; ">Photo Gallery</p>
       </div>
-      <div id="Contact" role="button" tabindex="0" aria-label="Contact" style="display:inline-block; text-align: center; padding: 16px; filter: drop-shadow(0 0 8px black); width: fit-content">
+      <div id="Contact" role="button" tabindex="0" aria-label="Contact" style="display:inline-block; text-align: center; padding: 16px; filter: drop-shadow(0 4px 12px rgba(15, 111, 168, 0.3)); width: fit-content">
         <img src="./Contact.png" style="width: 64px; height: 64px; border-radius: 16px;">
         <p style="margin: 0px; color: #fff; ">Contact Me!</p>
       </div>
-      <div id="AboutBtn" role="button" tabindex="0" aria-label="About" style="display:inline-block; text-align: center; padding: 16px; filter: drop-shadow(0 0 8px black); width: fit-content">
+      <div id="AboutBtn" role="button" tabindex="0" aria-label="About" style="display:inline-block; text-align: center; padding: 16px; filter: drop-shadow(0 4px 12px rgba(15, 111, 168, 0.3)); width: fit-content">
         <img src="./huh.png" style="width: 64px; height: 64px; border-radius: 16px;">
         <p style="margin: 0px; color: #fff; ">About me</p>
+      </div>
+      <div id="musicIcon" role="button" tabindex="0" aria-label="Music" style="display:inline-block; text-align: center; padding: 16px; filter: drop-shadow(0 4px 12px rgba(15, 111, 168, 0.3)); width: fit-content">
+        <img src="./music.png" style="width: 64px; height: 64px; border-radius: 16px;">
+        <p style="margin: 0px; color: #fff; ">Music</p>
       </div>
     </div>
   </div>
@@ -67,6 +74,19 @@
     <iframe src="https://blog.slitrostudio.me"></iframe>
   </div>
 
+<div id="music" class="compact">
+    <div id="musicheader">
+      <div id="window-controls">
+        <button aria-label="Close" title="Close" onclick="event.stopPropagation(); closeWindow(document.getElementById('music'))"></button>
+      </div>
+      <p style="margin: 0px; color: black; font-weight: 500">Music</p>
+    </div>
+    <h1>Music I'm into right now</h1>
+    <audio controls style="width: 100%; margin-top: 12px;">
+      <source src="Level of Concern.mp3" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
+  </div>
 
   <div id="stats" class="compact">
     <div id="statsheader">
@@ -75,13 +95,10 @@
       </div>
       <p style="margin: 0px; color: black; font-weight: 500">Stats</p>
     </div>
-    <section class="tracker-section">
-      <div class="tracker-box">
         <h1>Fun Lil' Stats</h1>
         <p id="time"></p>
         <p id="lastfm"></p>
       </div>
-    </section>
   </div>
 
     <div id="contact" class="compact">

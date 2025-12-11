@@ -7,6 +7,49 @@
   --button-focus-ring: rgba(0, 120, 215, 0.28);
 }
 
+/* Wobble animation for wobbly mode */
+@keyframes wobble {
+  0%, 100% { transform: translateX(0) rotate(0deg); }
+  25% { transform: translateX(-6px) rotate(-1.5deg); }
+  50% { transform: translateX(6px) rotate(1.5deg); }
+  75% { transform: translateX(-3px) rotate(-0.75deg); }
+}
+
+.wobble {
+  animation: wobble 0.3s infinite;
+}
+
+/* Close animation for wobbly mode - randomization handled via JS inline styles */
+@keyframes wobbleCloseSpinCW {
+  0% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+@keyframes wobbleCloseSpinCCW {
+  0% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0) rotate(-720deg);
+    opacity: 0;
+  }
+}
+
+.wobble-closing {
+  animation: wobbleCloseSpinCW 0.6s ease-in forwards !important;
+}
+
+.wobble-closing.ccw {
+  animation: wobbleCloseSpinCCW 0.6s ease-in forwards !important;
+}
+
 /* Use ABeeZee everywhere by default so headings, lists, buttons, etc. inherit it */
 html, body, button, input, textarea, select, a, p, div, span,
 h1, h2, h3, h4, h5, h6, .item {
@@ -53,8 +96,9 @@ html, body {
 }
 body {
   margin: 0;
-  background-image: url('bricked up.JPG');
+  background-image: url('da ocean.JPG');
   background-size: cover;
+  background-attachment: fixed;
   height: 100vh;
   width: 100vw;
   font-family: 'ABeeZee', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
@@ -84,6 +128,28 @@ body {
   background-color: rgba(256,256,256,0.125);
   padding: 4px 12px;
   border-radius: 16px;
+  transition: background-color 150ms ease;
+}
+
+#welcomeopen:hover,
+#wobbleToggle:hover {
+  background-color: rgba(256,256,256,0.2);
+}
+
+#wobbleToggle {
+  cursor: pointer;
+  font-weight: 700;
+  background-color: rgba(256,256,256,0.125);
+  padding: 4px 12px;
+  border-radius: 16px;
+  transition: background-color 150ms ease, opacity 150ms ease;
+  opacity: 0.5;
+  user-select: none;
+}
+
+#wobbleToggle.active {
+  opacity: 1;
+  background-color: rgba(230, 126, 34, 0.3);
 }
 
 #timebox {
@@ -94,7 +160,7 @@ body {
 }
 
 /* Window (frosted) - applied to welcome and notes */
-#welcome, #notes, #stats, #photo, #contact, #About, #badges {
+#welcome, #notes, #stats, #photo, #contact, #About, #badges, #music {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -108,15 +174,49 @@ body {
   -webkit-backdrop-filter: blur(8px);
   box-shadow: 0 12px 30px rgba(0,0,0,0.15);
   color: #000;
-  border-radius: 30px;
+  border-radius: 16px;
   overflow: hidden;
   box-sizing: border-box;
   border-image-width: 250px;
   border-image-height: 250px;
 
 }
- 
-#welcomeheader, #notesheader, #statsheader, #photoheader, #contactheader, #aboutheader, #badgesheader {
+
+/* Accent colors for individual windows (title bar backgrounds) */
+#notesheader {
+  background-color: rgba(74, 144, 226, 0.5) !important;
+}
+
+#statsheader {
+  background-color: rgba(155, 89, 182, 0.5) !important;
+}
+
+#photoheader {
+  background-color: rgba(26, 188, 156, 0.5) !important;
+}
+
+#contactheader {
+  background-color: rgba(230, 126, 34, 0.5) !important;
+}
+
+#aboutheader {
+  background-color: rgba(233, 30, 99, 0.5) !important;
+}
+
+#badgesheader {
+  background-color: rgba(241, 196, 15, 0.5) !important;
+}
+
+#musicheader {
+  background-color: rgba(52, 152, 219, 0.5) !important;
+}
+
+/* Ensure text in colored headers is readable */
+#notesheader p, #statsheader p, #photoheader p, #contactheader p, #aboutheader p, #badgesheader p, #musicheader p {
+  color: #fff !important;
+}
+
+#welcomeheader, #notesheader, #statsheader, #photoheader, #contactheader, #aboutheader, #badgesheader, #musicheader {
   position: absolute;
   top: 0;
   left: 0;
@@ -130,8 +230,8 @@ body {
   background-color: rgba(255,255,255,0.18);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
-  border-top-left-radius: 30px;
-  border-top-right-radius: 30px;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
   box-sizing: border-box;
 }
 
@@ -152,6 +252,8 @@ body {
   border: none;
   box-shadow: 0 1px 0 rgba(0,0,0,0.15);
   cursor: pointer;
+  pointer-events: auto !important;
+  z-index: 1000;
 }
 #window-controls button[aria-label="Close"] { background: #ff5f57; }
 #window-controls button[aria-label="Minimize"] { background: #ffbd2e; }

@@ -4,6 +4,25 @@
 var _welcomeEl = document.getElementById("welcome");
 if (_welcomeEl) dragElement(_welcomeEl);
 
+// Global wobbly mode state
+var wobbleMode = false;
+
+// Toggle wobbly mode
+var wobbleToggle = document.getElementById('wobbleToggle');
+if (wobbleToggle) {
+  wobbleToggle.addEventListener('click', function() {
+    wobbleMode = !wobbleMode;
+    wobbleToggle.classList.toggle('active');
+    wobbleToggle.title = wobbleMode ? 'Wobbly mode ON' : 'Wobbly mode OFF';
+  });
+  wobbleToggle.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      wobbleToggle.click();
+    }
+  });
+}
+
 // Step 1: Define a function called `dragElement` that makes an HTML element draggable.
 function dragElement(element) {
   // Step 2: Set up variables to keep track of the element's position.
@@ -50,6 +69,11 @@ function dragElement(element) {
   // Optionally cap width so it remains visible on small viewports
   element.style.maxWidth = '90vw';
 
+    // Apply wobble if wobbly mode is on
+    if (wobbleMode) {
+      element.classList.add('wobble');
+    }
+
     initialX = clientX;
     initialY = clientY;
     // Step 8: Set up event listeners for mouse movement (`elementDrag`) and mouse button release (`closeDragElement`).
@@ -87,6 +111,8 @@ function dragElement(element) {
     // after the user finishes dragging.
     element.style.width = '';
     element.style.maxWidth = '';
+    // Remove wobble when done dragging
+    element.classList.remove('wobble');
   }
 }
 
@@ -96,7 +122,27 @@ var welcomeScreen = document.querySelector("#welcome");
 
 function closeWindow(element) {
   if (!element) return;
-  element.style.display = "none";
+  
+  // If in wobbly mode, apply close animation
+  if (wobbleMode) {
+    // Remove wobble class so close animation takes over
+    element.classList.remove('wobble');
+    
+    // Randomly choose spin direction
+    if (Math.random() > 0.5) {
+      element.classList.add('wobble-closing', 'ccw');
+    } else {
+      element.classList.add('wobble-closing');
+    }
+    
+    // Wait for animation to complete before hiding
+    setTimeout(function() {
+      element.style.display = "none";
+      element.classList.remove('wobble-closing', 'ccw');
+    }, 600);
+  } else {
+    element.style.display = "none";
+  }
 }
 
 // Simple icon selection helpers (guarded and non-throwing)
@@ -233,6 +279,13 @@ if (_badgesEl) {
   _badgesEl.style.display = 'none';
 }
 
+// Initialize and hide music window by default
+var _musicEl = document.querySelector('#music');
+if (_musicEl) {
+  initializeWindow('music');
+  _musicEl.style.display = 'none';
+}
+
 // Wire the desktop notes icon to open the notes window (click and keyboard)
 var notesIcon = document.getElementById('notesIcon');
 if (notesIcon) {
@@ -287,6 +340,24 @@ if (photoIcon) {
   });
 }
 
+// Wire the music icon (click + keyboard) to open the music window
+var musicIcon = document.getElementById('musicIcon');
+if (musicIcon) {
+  musicIcon.addEventListener('click', function(e) {
+    var music = document.getElementById('music');
+    if (!music) return;
+    openWindow(music);
+  });
+  musicIcon.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      var music = document.getElementById('music');
+      if (!music) return;
+      openWindow(music);
+    }
+  });
+}
+
 // Wire the badges opener link to open the badges window (click + keyboard)
 var openBadgesLink = document.getElementById('openBadges');
 if (openBadgesLink) {
@@ -301,6 +372,24 @@ if (openBadgesLink) {
       var badges = document.getElementById('badges');
       if (!badges) return;
       openWindow(badges);
+    }
+  });
+}
+
+// Wire the music icon (click + keyboard) to open the music window
+var musicIcon = document.getElementById('music');
+if (musicIcon && musicIcon.getAttribute('role') === 'button') {
+  musicIcon.addEventListener('click', function(e) {
+    var music = document.getElementById('music');
+    if (!music) return;
+    openWindow(music);
+  });
+  musicIcon.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      var music = document.getElementById('music');
+      if (!music) return;
+      openWindow(music);
     }
   });
 }
