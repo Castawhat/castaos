@@ -199,13 +199,14 @@ body {
 }
 .track {
   display: flex;
-  gap: 12px;
-  align-items: center;
-  padding: 10px 12px;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px;
   background: rgba(0,0,0,0.03);
   border-radius: 10px;
   border: 1px solid rgba(0,0,0,0.04);
   width: 100%;
+  box-sizing: border-box;
 }
 .track .art {
   width: 56px;
@@ -218,7 +219,7 @@ body {
   font-size: 1.2rem;
 }
 .track .meta {
-  flex: 1 1 auto;
+  width: 100%;
 }
 .track .meta h4 {
   margin: 0 0 4px 0;
@@ -229,10 +230,18 @@ body {
   color: rgba(0,0,0,0.55);
 }
 .track .controls {
-  width: 140px;
+  width: 100%;
   display: flex;
-  align-items: center;
-  justify-content: flex-end;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  overflow: visible;
+}
+
+.track .controls audio {
+  width: 100%;
+  height: auto;
+  min-height: 40px;
 }
 
 /* Accent colors for individual windows (title bar backgrounds) */
@@ -334,6 +343,8 @@ body {
   width: min(56vw, 460px) !important;
   max-width: 90vw;
   padding: 56px 18px 18px 18px !important;
+  max-height: 85vh !important;
+  overflow-y: auto !important;
 }
 
 #music h1 {
@@ -368,7 +379,8 @@ body {
 
 #music audio {
   width: 100%;
-  height: 32px;
+  height: auto;
+  min-height: 40px;
   box-sizing: border-box;
   display: block;
 }
@@ -396,6 +408,10 @@ body {
   margin-bottom: 0.9rem;
   text-wrap: balance;
   hyphens: auto;
+}
+
+#pfpCycle {
+  float: right;
 }
 
 /* Hide stats header from normal flow but keep it as drag handle */
@@ -716,7 +732,7 @@ body {
   max-width: 720px;
   margin: 0.8rem auto 0 auto;
   box-sizing: border-box;
-  max-height: 40vh; /* keep it shorter */
+  max-height: 55vh; /* keep it shorter */
   overflow-y: auto; /* scroll if content is long */
 }
 
@@ -724,8 +740,8 @@ body {
 .ipad-mock {
   position: relative;
   width: 360px;
-  height: 520px;
-  margin: 20px auto 0 auto;
+  height: 400px;
+  margin: 0px auto 0 auto;
 }
 
 .ipad-bezel {
