@@ -524,9 +524,8 @@ function handleIconTap(element) {
   var pfpImg = document.getElementById('pfpCycle');
   if (!pfpImg) return;
 
-  var pfpList = ['./pfp.png', './xmaspfp.png', './hallowpfp.png', './Sad.png', './aussie.png', './flashbang.png'];
+  var pfpList = ['./PFP.png', './xmaspfp.png', './hallowpfp.png', './Sad.png', './aussie.png', './flashbang.png'];
   
-  // Shuffle array
   for (var i = pfpList.length - 1; i > 0; i--) {
     var j = Math.floor(Math.random() * (i + 1));
     var temp = pfpList[i];
@@ -539,7 +538,6 @@ function handleIconTap(element) {
   pfpImg.addEventListener('click', function() {
     currentIndex = (currentIndex + 1) % pfpList.length;
     pfpImg.src = pfpList[currentIndex];
-    // Add a subtle scale animation
     pfpImg.style.transform = 'scale(0.95)';
     setTimeout(function() {
       pfpImg.style.transform = 'scale(1)';
